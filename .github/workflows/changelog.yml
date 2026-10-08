@@ -1,0 +1,20 @@
+name: changelog
+
+on:
+  pull_request:
+    types: [opened, ready_for_review, synchronize, reopened, labeled, unlabeled, edited]
+    branches:
+      - main
+  merge_group:
+    types: [checks_requested]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  changelog:
+    permissions:
+      contents: read
+      pull-requests: read
+    uses:  open-telemetry/shared-workflows/.github/workflows/chloggen.yml@0a92ab98860089055203c35516beb30ac55dce0a
