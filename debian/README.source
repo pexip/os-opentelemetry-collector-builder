@@ -1,0 +1,38 @@
+# Purpose
+
+This source package is based on the upstream opentelemetry-collector git tree
+but is only used to build the builder.  This is the tool which we then use
+the build a custom opentelemetry builder for PexOS.
+
+# Vendoring for a new upstream
+
+In order to build offline we need to vendor the dependencies properly.  To
+do this, import the new orig into the upstream-${suite} branch and delete
+the contents of cmd/builder/vendor.
+
+Working on the upstream-{suite} branch, use `cd cmd/builder/vendor && go mod
+vendor` (ensuring that the right version of go is on your path) to vendor the
+files in cmd/builder/vendor, then move them to the top level
+
+```
+export PATH=/usr/lib/go-1.26/bin:${PATH}
+export GOTOOLCHAIN=local
+cd cmd/builder/vendor && go mod vendor && mv vendor ../../buildervendor
+```
+
+Commit the buildervendor directory to the upstream branch.
+
+Tar the directory up (from the repo dir):
+
+```
+tar -zcvf ../opentelemetry-collector-builder_${version}.orig-buildervendor.tar.gz buildervendor/
+```
+
+Then add the extra tarball to pristine-tar:
+
+```
+pristine-tar commit ../opentelemetry-collector-builder_${version}.orig-buildervendor.tar.gz upstream-${suite}
+```
+
+Push the upstream and pristine-tar branches and update the Pexip branches as
+usual.

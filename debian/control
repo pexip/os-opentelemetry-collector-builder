@@ -1,0 +1,20 @@
+Source: opentelemetry-collector-builder
+Section: golang
+Priority: optional
+Maintainer: Pexip AS <packaging@pexip.com>
+Rules-Requires-Root: no
+Build-Depends:
+ debhelper-compat (= 13),
+ golang-1.26,
+Standards-Version: 4.7.2
+Homepage: https://github.com/open-telemetry/opentelemetry-collector
+Vcs-Browser: https://github.com/pexip/os-opentelemetry-collector-builder
+Vcs-Git: https://github.com/pexip/os-opentelemetry-collector-builder
+
+Package: opentelemetry-collector-builder
+Architecture: any
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+Description: Opentelemetry collector builder
+ Tool for preparing source and building the OpenTelemetry collector.

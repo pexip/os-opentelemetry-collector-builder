@@ -1,0 +1,5 @@
+opentelemetry-collector-builder (0.162.0-0pexip25u1) pexip-trixie; urgency=medium
+
+  * Initial Pexip packaging.
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Thu, 08 Oct 2026 10:51:42 +0100
